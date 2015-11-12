@@ -1,0 +1,19 @@
+<h1>Listing carts</h1>
+ 
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Date</th>
+    <th/>
+  </tr>
+ 
+  <% @carts.each do |c| %>
+    <tr>
+      <td><%= c.name %></td>
+      <td><%= c.description %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'BACK', controller: 'welcome' %>

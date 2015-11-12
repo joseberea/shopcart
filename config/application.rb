@@ -22,6 +22,6 @@ module Workspace
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.web_console.whitelisted_ips = '195.53.48.100'
+    config.web_console.whitelisted_ips = '31.177.98.235'
   end
 end

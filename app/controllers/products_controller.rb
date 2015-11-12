@@ -42,7 +42,7 @@ class ProductsController < ApplicationController
         redirect_to new_product_path
     end
     
-    # PROVATE METHODS
+    # PRIVATE METHODS
     private
       def product_params
         params.require(:product).permit(:name, :description)
