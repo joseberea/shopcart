@@ -23,6 +23,7 @@
       <% if cart.status == 'open' %>
         <%= link_to 'CLOSE', close_cart_path(cart), method: :post, data: { id: cart.id, confirm: 'Are you sure?' }%>
       <% end %>
+      <%= link_to 'PRODUCTS', cart_products_path(cart) %>
       </td>
     </tr>
   <% end %>

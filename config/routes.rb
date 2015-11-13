@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   get 'welcome/index'
 
-  resources :products, :carts, :recipes, :cart_products
+  resources :products, :carts, :recipes
+  resources :recipe_products
+  resources :cart_products
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
