@@ -11,12 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112160130) do
+ActiveRecord::Schema.define(version: 20151113111822) do
+
+  create_table "cart_products", force: :cascade do |t|
+    t.integer  "cart_id"
+    t.integer  "product_id"
+    t.integer  "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "cart_products", ["cart_id"], name: "index_cart_products_on_cart_id"
+  add_index "cart_products", ["product_id"], name: "index_cart_products_on_product_id"
 
   create_table "carts", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
     t.date     "date"
+    t.string   "status"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -24,6 +36,13 @@ ActiveRecord::Schema.define(version: 20151112160130) do
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.string   "name"
+    t.text     "desctiption"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

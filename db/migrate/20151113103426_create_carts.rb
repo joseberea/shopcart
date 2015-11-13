@@ -4,6 +4,7 @@ class CreateCarts < ActiveRecord::Migration
       t.string :name
       t.text :description
       t.date :date
+      t.string :status
 
       t.timestamps null: false
     end

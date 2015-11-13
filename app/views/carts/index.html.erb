@@ -5,15 +5,28 @@
     <th>Name</th>
     <th>Description</th>
     <th>Date</th>
+    <th>Status</th>
     <th/>
   </tr>
  
-  <% @carts.each do |c| %>
+  <% @carts.each do |cart| %>
     <tr>
-      <td><%= c.name %></td>
-      <td><%= c.description %></td>
+      <td><%= cart.name %></td>
+      <td><%= cart.description %></td>
+      <td><%= cart.date %></td>
+      <td><%= cart.status %></td>
+      <td><%= link_to 'UPDATE', edit_cart_path(cart) %> |
+      <%= link_to 'DELETE', cart_path(cart), method: :delete, data: { confirm: 'Are you sure?' } %> |
+      <% if cart.status == 'closed' %>
+        <%= link_to 'OPEN', open_cart_path(cart), method: :post, data: { id: cart.id, confirm: 'Are you sure?' }%>
+      <% end %>
+      <% if cart.status == 'open' %>
+        <%= link_to 'CLOSE', close_cart_path(cart), method: :post, data: { id: cart.id, confirm: 'Are you sure?' }%>
+      <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
 
 <%= link_to 'BACK', controller: 'welcome' %>
+<%= link_to 'ADD', new_cart_path %>

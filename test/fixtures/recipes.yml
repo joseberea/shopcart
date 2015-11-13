@@ -2,12 +2,8 @@
 
 one:
   name: MyString
-  description: MyText
-  date: 2015-11-13
-  status: MyString
+  desctiption: MyText
 
 two:
   name: MyString
-  description: MyText
-  date: 2015-11-13
-  status: MyString
+  desctiption: MyText
