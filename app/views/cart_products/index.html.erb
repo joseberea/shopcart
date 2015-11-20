@@ -1,6 +1,37 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Cart Products</h1>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">    
+    </head>
+    <body>
+      
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">ShopCart</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><%= link_to 'PRODUCTS', products_path %></li>
+                <li><%= link_to 'CARTS', carts_path %></li>
+                <li><%= link_to 'RECIPES', recipes_path %></li>
+                <li><%= link_to 'CART PRODUCTS', cart_products_path %></li>
+                <li><%= link_to 'RECIPE PRODUCTS', recipe_products_path %></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+      </nav>
+      
+      <div class="container-fluid">
 
 <table>
   <thead>
@@ -18,8 +49,6 @@
         <td><%= cart_product.cart.name %></td>
         <td><%= cart_product.product.name %></td>
         <td><%= cart_product.quantity %></td>
-        <td><%= link_to 'Show', cart_product %></td>
-        <td><%= link_to 'Edit', edit_cart_product_path(cart_product) %></td>
         <td><%= link_to 'Destroy', cart_product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -29,3 +58,7 @@
 <br>
 
 <%= link_to 'New Cart product', new_cart_product_path %>
+
+    </div>
+  </body>
+</html>

@@ -13,3 +13,55 @@
  *= require_tree .
  *= require_self
  */
+ 
+ 
+body
+{
+    /*background: url(https://upload.wikimedia.org/wikipedia/commons/2/2f/Culinary_fruits_front_view.jpg);*/
+    background-size: cover;
+} 
+ 
+.jumbotron{
+    color: #FFFFFF;
+    /*background-color:none !important;*/
+    background-color: black;
+}
+
+.navbar{
+    background-color: black;
+    border: none;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0 5px;
+}
+
+thead th {
+  background-color: #006DCC;
+  color: white;
+}
+
+tbody td {
+  background-color: #EEEEEE;
+}
+
+tr td:first-child,
+tr th:first-child {
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+
+tr td:last-child,
+tr th:last-child {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.btn-primary-nopadding {
+  padding: 1px 6px;
+}

@@ -27,29 +27,18 @@ class CartProductsController < ApplicationController
   # POST /cart_products.json
   def create
     @cart_product = CartProduct.new(cart_product_params)
-
-    respond_to do |format|
-      if @cart_product.save
-        format.html { redirect_to @cart_product, notice: 'Cart product was successfully created.' }
-        format.json { render :show, status: :created, location: @cart_product }
-      else
-        format.html { render :new }
-        format.json { render json: @cart_product.errors, status: :unprocessable_entity }
-      end
-    end
+    @cart_product.status = 'open'
+    @cart_product.save
+    redirect_to cart_products_path
   end
 
   # PATCH/PUT /cart_products/1
   # PATCH/PUT /cart_products/1.json
   def update
-    respond_to do |format|
-      if @cart_product.update(cart_product_params)
-        format.html { redirect_to @cart_product, notice: 'Cart product was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cart_product }
-      else
-        format.html { render :edit }
-        format.json { render json: @cart_product.errors, status: :unprocessable_entity }
-      end
+    if @cart_product.update(cart_products_params)
+        redirect_to cart_products_path
+    else    
+        render 'edit'
     end
   end
 
@@ -62,6 +51,18 @@ class CartProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def open
+      @cart_product = CartProduct.find(params[:id])
+      @cart_product.update_attributes(:status => 'open')
+      redirect_to root_path
+  end
+  
+  def close
+      @cart_product = CartProduct.find(params[:id])
+      @cart_product.update_attributes(:status => 'closed')
+      redirect_to root_path
+  end  
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -73,4 +74,5 @@ class CartProductsController < ApplicationController
     def cart_product_params
       params.require(:cart_product).permit(:cart_id, :product_id, :quantity)
     end
+
 end

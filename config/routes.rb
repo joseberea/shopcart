@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   #   get 'products/:id' => 'catalog#view'
   post '/carts/:id/close', to: 'carts#close', as: 'close_cart'
   post '/carts/:id/open', to: 'carts#open', as: 'open_cart'
+  post '/cart_products/:id/close', to: 'cart_products#close', as: 'close_cart_product'
+  post '/cart_products/:id/open', to: 'cart_products#open', as: 'open_cart_product'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

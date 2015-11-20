@@ -1,21 +1,74 @@
-<h1>Listing products</h1>
- 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th/>
-  </tr>
- 
-  <% @products.each do |p| %>
-    <tr>
-      <td><%= p.name %></td>
-      <td><%= p.description %></td>
-      <td><%= link_to 'UPDATE', edit_product_path(p) %> |
-      <%= link_to 'DELETE', product_path(p), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">    
+    </head>
+    <body>
 
-<%= link_to 'BACK', controller: 'welcome' %>
-<%= link_to 'ADD', new_product_path %>
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">ShopCart</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li><%= link_to 'PRODUCTS', products_path %></li>
+                <li><%= link_to 'CARTS', carts_path %></li>
+                <li><%= link_to 'RECIPES', recipes_path %></li>
+                <li><%= link_to 'CART PRODUCTS', cart_products_path %></li>
+                <li><%= link_to 'RECIPE PRODUCTS', recipe_products_path %></li>
+              </ul>
+              <ul class="nav navbar-nav navbar-right">
+              </ul>
+            </div><!--/.nav-collapse -->
+          </div><!--/.container-fluid -->
+      </nav>
+
+     <div class="alert alert-info text-center"><h5>Listing <strong>PRODUCTS</strong></h5></div>
+ 
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="text-align: center;" width="80%">Name</th>
+            <th width="10%"/>
+            <th width="10%"/>
+          </tr>
+        </thead>
+       
+        <% @products.each do |p| %>
+          <tr>
+            <td><%= p.name %></td>
+            <td align="center">
+              <%= link_to edit_product_path(p) do %>
+                    <button class="btn btn-primary btn-primary-nopadding center-block"><i class="glyphicon glyphicon-edit"></i></button>
+              <% end %>  
+            </td>
+            <td align="center">
+              <%= link_to product_path(p), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                   <button class="btn btn-primary btn-primary-nopadding center-block"><i class="glyphicon glyphicon-remove"></i></button>
+              <% end %>  
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+      <div align="center" class="col-md-3 col-md-offset-4">
+        <div class="btn-group" role="group" aria-label="...">
+          <%= link_to controller: 'welcome' do %>
+            <button type="button" class="btn btn-primary">Back</button>
+          <% end %>
+          <%= link_to new_product_path do %>
+            <button type="button" class="btn btn-primary">Add</button>
+          <% end %>
+        </div>
+      </div>
+
+  </body>
+</html>
