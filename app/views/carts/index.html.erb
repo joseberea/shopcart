@@ -1,33 +1,88 @@
-<h1>Listing carts</h1>
- 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Date</th>
-    <th>Status</th>
-    <th/>
-  </tr>
- 
-  <% @carts.each do |cart| %>
-    <tr>
-      <td><%= cart.name %></td>
-      <td><%= cart.description %></td>
-      <td><%= cart.date %></td>
-      <td><%= cart.status %></td>
-      <td><%= link_to 'UPDATE', edit_cart_path(cart) %> |
-      <%= link_to 'DELETE', cart_path(cart), method: :delete, data: { confirm: 'Are you sure?' } %> |
-      <% if cart.status == 'closed' %>
-        <%= link_to 'OPEN', open_cart_path(cart), method: :post, data: { id: cart.id, confirm: 'Are you sure?' }%>
-      <% end %>
-      <% if cart.status == 'open' %>
-        <%= link_to 'CLOSE', close_cart_path(cart), method: :post, data: { id: cart.id, confirm: 'Are you sure?' }%>
-      <% end %>
-      <%= link_to 'PRODUCTS', cart_products_path(cart) %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">    
+    </head>
+    <body>
 
-<%= link_to 'BACK', controller: 'welcome' %>
-<%= link_to 'ADD', new_cart_path %>
+        <!-- Static navbar -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/welcome/index">ShopCart</a>
+              </div>
+              <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                  <li><%= link_to 'PRODUCTS', products_path %></li>
+                  <li><%= link_to 'CARTS', carts_path %></li>
+                  <li><%= link_to 'RECIPES', recipes_path %></li>
+                  <li><%= link_to 'CART PRODUCTS', cart_products_path %></li>
+                  <li><%= link_to 'RECIPE PRODUCTS', recipe_products_path %></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                </ul>
+              </div><!--/.nav-collapse -->
+            </div><!--/.container-fluid -->
+        </nav>
+        
+     <div class="alert alert-info text-center"><h5>Listing <strong>CARTS</strong></h5></div>
+ 
+      <table class="table">
+        <thead>
+          <tr>
+            <th style="text-align: center;" width="70%">Name</th>
+            <th width="10%"/>
+            <th width="10%"/>
+            <th width="10%"/>
+          </tr>
+        </thead>
+       
+        <% @carts.each do |p| %>
+          <tr>
+            <td><%= p.name %></td>
+            <% if p.status == 'open' %>
+              <td align="center">
+                <%= link_to close_cart_path(p), method: :post, data: { id: p.id } do %>
+                  <i class="glyphicon glyphicon-shopping-cart"></i>
+                <% end %>
+              </td>
+            <% else %>
+              <td align="center">
+                <%= link_to open_cart_path(p), method: :post, data: { id: p.id } do %>
+                  <i class="glyphicon glyphicon-ok"></i>
+                <% end %>
+              </td>                  
+            <% end %>
+            <td align="center">
+              <%= link_to edit_cart_path(p) do %>
+                    <button class="btn btn-primary btn-primary-nopadding center-block"><i class="glyphicon glyphicon-edit"></i></button>
+              <% end %>  
+            </td>
+            <td align="center">
+              <%= link_to cart_path(p), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                   <button class="btn btn-primary btn-primary-nopadding center-block"><i class="glyphicon glyphicon-remove"></i></button>
+              <% end %>  
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+      <div align="center" class="col-md-3 col-md-offset-4">
+        <div class="btn-group" role="group" aria-label="...">
+          <%= link_to controller: 'welcome' do %>
+            <button type="button" class="btn btn-primary">Back</button>
+          <% end %>
+          <%= link_to new_cart_path do %>
+            <button type="button" class="btn btn-primary">Add</button>
+          <% end %>
+        </div>
+      </div>        
+ 
+    </body>
+</html>

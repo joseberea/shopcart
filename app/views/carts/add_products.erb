@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">    
     </head>
     <body>
-      
+
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
           <div class="container-fluid">
@@ -19,7 +19,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li><%= link_to 'PRODUCTS', carts_path %></li>
+                <li><%= link_to 'PRODUCTS', products_path %></li>
                 <li><%= link_to 'CARTS', carts_path %></li>
                 <li><%= link_to 'RECIPES', recipes_path %></li>
                 <li><%= link_to 'CART PRODUCTS', cart_products_path %></li>
@@ -32,29 +32,33 @@
       </nav>
       
       <div class="container-fluid">
-        
-          <%= form_for :cart, url: carts_path, method: :post, :html => {:class => "form-horizontal"} do |f| %>
-            <div class="form-group">
-              <label for="name" class="col-sm-2 control-label"><%= f.label :name %></label>
-              <div class="col-sm-10">
-                <%= f.text_field :name, class: "form-control"%>
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="description" class="col-sm-2 control-label"><%= f.label :description %></label>
-              <div class="col-sm-10">
-                <%= f.text_field :description, class: "form-control"%>
-              </div>
-            </div>
-    
-            <div align="center" class="col-md-3 col-md-offset-4">
-              <%= link_to carts_path do %>
-                <button type="button" class="btn btn-primary">Back</button>
+        <table class="table">
+          <thead>
+            <tr>
+              <th style="text-align: center;" width="90%">Name</th>
+              <th width="10%"/>
+            </tr>
+          </thead>        
+          <% @products.each do |p| %>
+            <tr>
+              <td><%= p.name %></td>
+              <% if @cart_products.include? p %>
+                <td align="center">
+                  <%= link_to cart_add_products_submit_path(id: p, c: @cart), method: :post do %>
+                    <button class="btn btn-primary btn-primary-nopadding center-block"><i class="glyphicon glyphicon-ok"></i></button>
+                  <% end %>
+                </td>
+              <% else %>
+                <td align="center">
+                  <%= link_to cart_add_products_submit_path(id: p, c: @cart), method: :post do %>
+                    <button class="btn btn-primary btn-primary-nopadding center-block"><i class="glyphicon glyphicon-remove"></i></button>
+                  <% end %>
+                </td>
               <% end %>
-              <%= f.submit 'Save', :class => 'btn btn-primary' %>
-            </div>
-          <% end %>        
-
+            </tr>
+          <% end %>
+      </table>
+        
       </div>
   </body>
 </html>

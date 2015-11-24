@@ -12,10 +12,15 @@ Rails.application.routes.draw do
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  
   post '/carts/:id/close', to: 'carts#close', as: 'close_cart'
   post '/carts/:id/open', to: 'carts#open', as: 'open_cart'
+  get  '/carts/:id/add_products', to: 'carts#add_products', as: 'cart_add_products'  
+  post  '/carts/:id/add_products_submit', to: 'carts#add_products_submit', as: 'cart_add_products_submit'  
+  
   post '/cart_products/:id/close', to: 'cart_products#close', as: 'close_cart_product'
   post '/cart_products/:id/open', to: 'cart_products#open', as: 'open_cart_product'
+
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 

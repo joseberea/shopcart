@@ -58,9 +58,28 @@ class CartsController < ApplicationController
         redirect_to carts_path
     end
     
+    #add cart products handler
+    def add_products
+        @products = Product.all
+        @cart = Cart.find(params[:id])
+        @cart_products = Product.joins(:cart_products).where("cart_products.cart_id = ?", @cart.id)
+    end
+    
+    #add cart products submit
+    def add_products_submit
+        @product = Product.find(params[:id])
+        @cart = Cart.find(params[:c])
+        @cart_product = CartProduct.new
+        @cart_product.cart_id = @cart.id
+        @cart_product.product_id = @product.id
+        @cart_product.save
+        redirect_to carts_path
+    end
+    
     # PRIVATE METHODS
     private
       def cart_params
         params.require(:cart).permit(:name, :description, :date, :status)
-      end    
+      end   
+
 end
